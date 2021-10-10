@@ -833,7 +833,6 @@ section {
 
 .portfolio .portfolio-item .portfolio-img {
     overflow: hidden;
-    height: 400px;
 }
 
 .portfolio .portfolio-item .portfolio-img img {
@@ -909,10 +908,6 @@ section {
 
 .portfolio .portfolio-item:hover .portfolio-img img {
     transform: scale(1.2);
-}
-
-.portfolio .portfolio-item:hover .portfolio-info {
-    opacity: 1;
 }
 
 
