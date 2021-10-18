@@ -341,8 +341,13 @@ h6 {
     flex-direction: column;
     text-align: center;
     position: relative;
-    height: 75vh;
+    height: 80vh;
     padding-top: 50px;
+}
+
+#hero .carousel-container img {
+    width: 60vh;
+    height: 60vh;
 }
 
 #hero h2 {
@@ -413,6 +418,10 @@ h6 {
     }
     #hero h2 {
         font-size: 28px;
+    }
+    #hero .carousel-container img {
+        width: 50vh;
+        height: 40vh;
     }
 }
 
