@@ -414,6 +414,10 @@ h6 {
     #hero h2 {
         font-size: 28px;
     }
+
+    #header .logo h1 { 
+        font-size: 9px;
+    }
 }
 
 .hero-waves {
