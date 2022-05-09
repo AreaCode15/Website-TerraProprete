@@ -1,31 +1,47 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+	require_once(__DIR__.'/vendor/autoload.php');
+	use \Mailjet\Resources;
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@terra-multiservices.fr';
+	define('API_USER', '5643f20e6d7c930f4350c3416e19b7ef');
+	define('API_LOGIN', 'b9a875920101663678e044233616f0b4');
+	$mj = new \Mailjet\Client(API_USER, API_LOGIN,true,['version' => 'v3.1']);
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+	if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['message'])){
+		$name = htmlspecialchars($_POST['name']);
+		$email = htmlspecialchars($_POST['email']);
+		$message = htmlspecialchars($_POST['message']);
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+		if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+			$body = [
+				'Messages' => [
+				  [
+					'From' => [
+					  'Email' => "contact@terra-multiservices.fr",
+					  'Name' => "Arthur"
+					],
+					'To' => [
+					  [
+						'Email' => "contact@terra-multiservices.fr",
+						'Name' => "Arthur"
+					  ]
+					],
+					'Subject' => "Mail provenant du Site Terra Proprete & Multiservices",
+					'TextPart' => "$email, $message",
+				  ]
+				]
+			  ];
+			  $response = $mj->post(Resources::$Email, ['body' => $body]);
+			  $response->success();
+			  echo "Email envoyé avec succès !";
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+		}else{
+			echo "Email non valide";
+		}
 
-  echo $contact->send();
+	}else{
+		header('Location:index.html');
+		die();
+	}
+
+
 ?>
