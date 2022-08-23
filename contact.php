@@ -11,7 +11,7 @@ $mailheader = "From:".$name."<".$email.">\r\n";
 
 $recipient = "contact@terra-multiservices.fr";
 
-mail($recipient, $subject, $message, $mailheader)
+mail($recipient, $subject,$email, $message, $mailheader)
 or die("error!");
 
 echo"Message envoyé avec succès!";
